@@ -12,6 +12,6 @@ class AnagramFinder {
         case None => anagrams.put(word.hashCode, AnagramGroup(word))
       }
     })
-    anagrams.values.toSet.filter(_.size > 1)
+    anagrams.values.toSet.filter(_.groupSize > 1)
   }
 }

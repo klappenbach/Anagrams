@@ -3,14 +3,16 @@
  * @param words
  */
 case class AnagramGroup private(private val words: Set[Word]) {
-  override val hashCode = words.head.hashCode
 
   def +(anagramCandidate: Word): AnagramGroup = {
-    if (anagramCandidate.hashCode == hashCode) new AnagramGroup(words + anagramCandidate)
-    else throw new RuntimeException(anagramCandidate.word + " is not an anagram of " + this)
+    assert(anagramCandidate.hashCode == words.head.hashCode, anagramCandidate.word + " is not an anagram of [" + this + "]")
+    new AnagramGroup(words + anagramCandidate)
   }
-  def size = words.size
-  override def toString = this.getClass.getSimpleName + "(" + words.map(_.word).mkString(" ") + ")"
+
+  def groupSize = words.size
+  def wordSize = words.head.word.size
+
+  override def toString = words.map(_.word).mkString(" ")
 }
 
 object AnagramGroup {
