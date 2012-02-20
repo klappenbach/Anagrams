@@ -9,8 +9,12 @@ object Main extends App {
 
   anagrams.toList.sortBy(_.groupSize).foreach(println)
 
-  val anagramCount = anagrams.toList.map(_.groupSize).sum
-  println("\n Found a total of " + anagramCount + " anagrams, in " + anagrams.size + " anagram groups, in " + dictionaryWords.size + " dictionary words.")
-  println("\n Group with longest anagram:")
-  println(" " + anagrams.toList.sortBy(_.wordSize).reverse.head)
+  printSomeStats()
+
+  def printSomeStats() {
+    val anagramCount = anagrams.toList.map(_.groupSize).sum
+    println("\n Found a total of " + anagramCount + " anagrams, in " + anagrams.size + " anagram groups, in " + dictionaryWords.size + " dictionary words.")
+    println("\n Group with longest anagram:")
+    println(" " + anagrams.toList.sortBy(_.wordSize).reverse.head)
+  }
 }
