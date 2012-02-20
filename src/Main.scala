@@ -5,16 +5,15 @@ object Main extends App {
     System.exit(0)
   }
   val dictionaryWords = new DictionaryReader().readFile( args(0))
-  val anagrams = new AnagramFinder().findAnagrams(dictionaryWords)
+  val anagrams = new AnagramFinder().findAnagrams(dictionaryWords).toList
 
-  anagrams.toList.sortBy(_.groupSize).foreach(println)
-
+  anagrams.sortBy(_.groupSize).foreach(println)
   printSomeStats()
 
   def printSomeStats() {
-    val anagramCount = anagrams.toList.map(_.groupSize).sum
+    val anagramCount = anagrams.map(_.groupSize).sum
     println("\n Found a total of " + anagramCount + " anagrams, in " + anagrams.size + " anagram groups, in " + dictionaryWords.size + " dictionary words.")
     println("\n Group with longest anagram:")
-    println(" " + anagrams.toList.sortBy(_.wordSize).reverse.head)
+    println(" " + anagrams.sortBy(_.wordSize).reverse.head)
   }
 }
