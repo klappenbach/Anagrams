@@ -1,10 +1,6 @@
 
 object Main extends App {
-  if(args.size < 1) {
-    println("Need a path to an dictionary file!")
-    System.exit(0)
-  }
-  val dictionaryWords = new DictionaryReader().readFile( args(0))
+  val dictionaryWords = if(args.size == 0) new DictionaryReader().readFile() else new DictionaryReader().readFile( args(0))
   val anagrams = new AnagramFinder().findAnagrams(dictionaryWords).toList
 
   anagrams.sortBy(_.groupSize).foreach(println)
